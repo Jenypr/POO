@@ -4,5 +4,4 @@ class IndexUI:
     def main():
         ManterClienteUI.main()
 
-if __name__ == "__main__":
-    IndexUI.main()
+IndexUI.main()
