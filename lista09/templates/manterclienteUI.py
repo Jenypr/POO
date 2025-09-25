@@ -5,7 +5,7 @@ import time
 
 class ManterClienteUI:
     def main():
-        st.header("Cadastro de Clientes")
+        st.header("Cadastro de Serviços")
         tab1, tab2, tab3, tab4 = st.tabs(["Listar", "Inserir", "Atualizar", "Excluir"])
         with tab1: ManterClienteUI.listar()
         with tab2: ManterClienteUI.inserir()
@@ -14,7 +14,7 @@ class ManterClienteUI:
 
     def listar():
         clientes = View.cliente_listar()
-        if len(clientes) == 0: st.write("Nenhum cliente cadastrado")
+        if len(clientes) == 0: st.write("Nenhum serviço cadastrado")
         else:
             list_dic = []
             for obj in clientes: list_dic.append(obj.to_json())
@@ -22,38 +22,38 @@ class ManterClienteUI:
             st.dataframe(df)
 
     def inserir():
-        nome = st.text_input("Informe o nome")
-        email = st.text_input("Informe o e-mail")
-        fone = st.text_input("Informe o fone")
+        nome = st.text_input("Informe o id")
+        email = st.text_input("Informe a descrição")
+        fone = st.text_input("Informe o valor")
         if st.button("Inserir"):
             View.cliente_inserir(nome, email, fone)
-            st.success("Cliente inserido com sucesso")
+            st.success("Serviço inserido com sucesso")
             time.sleep(2)
             st.rerun()
 
     def atualizar():
         clientes = View.cliente_listar()
-        if len(clientes) == 0: st.write("Nenhum cliente cadastrado")
+        if len(clientes) == 0: st.write("Nenhum serviço cadastrado")
         else:
-            op = st.selectbox("Atualização de Clientes", clientes)
-            nome = st.text_input("Informe o novo nome", op.get_nome())
-            email = st.text_input("Informe o novo e-mail", op.get_email())
-            fone = st.text_input("Informe o novo fone", op.get_fone())
+            op = st.selectbox("Atualização de Serviços", clientes)
+            nome = st.text_input("Informe o novo id", op.get_nome())
+            email = st.text_input("Informe a nova descrição", op.get_email())
+            fone = st.text_input("Informe o novo valor", op.get_fone())
             if st.button("Atualizar"):
                 id = op.get_id()
                 View.cliente_atualizar(id, nome, email, fone)
-                st.success("Cliente atualizado com sucesso")
+                st.success("Serviço atualizado com sucesso")
                 time.sleep(2)
                 st.rerun()
 
     def excluir():
         clientes = View.cliente_listar()
-        if len(clientes) == 0: st.write("Nenhum cliente cadastrado")
+        if len(clientes) == 0: st.write("Nenhum serviço cadastrado")
         else:
-            op = st.selectbox("Exclusão de Clientes", clientes)
+            op = st.selectbox("Exclusão de Serviços", clientes)
             if st.button("Excluir"):
                 id = op.get_id()
                 View.cliente_excluir(id)
-                st.success("Cliente excluído com sucesso")
+                st.success("Serviço excluído com sucesso")
                 time.sleep(2)
                 st.rerun()
